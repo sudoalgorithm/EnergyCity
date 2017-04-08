@@ -1,7 +1,9 @@
 package com.knrmalhotra.energycity;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Build;
@@ -24,8 +26,11 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MainActivity extends AppCompatActivity implements
         OnMapReadyCallback,
@@ -43,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements
     private FloatingActionButton mFloatingActionButton;
     private boolean isPressed = false;
     private FloatingActionButton mbtn1, mbtn2,mbtn3;
+    private Context context = this;
 
 
     @Override
@@ -72,14 +78,14 @@ public class MainActivity extends AppCompatActivity implements
         mbtn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+            startActivity(new Intent(MainActivity.this, AnalyticsActivity.class));
             }
         });
 
         mbtn3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                startActivity(new Intent(MainActivity.this,ProfileActivity.class));
             }
         });
 
@@ -132,7 +138,7 @@ public class MainActivity extends AppCompatActivity implements
     public void onConnected(Bundle bundle) {
         mLocationRequest = new LocationRequest();
         mLocationRequest.setInterval(1000);
-        mLocationRequest.setFastestInterval(1000);
+        mLocationRequest.setFastestInterval(3000);
         mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION)
@@ -160,10 +166,43 @@ public class MainActivity extends AppCompatActivity implements
 
 
         LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+        BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(R.drawable.leaf);
         //MarkerOptions markerOptions = new MarkerOptions();
         //markerOptions.position(latLng);
         //markerOptions.title("Current Position");
         //mMarker = mGoogleMap.addMarker(markerOptions);
+        LatLng locationWafi = new LatLng(25.2296,55.3194);
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.position(locationWafi);
+        markerOptions.icon(icon);
+        markerOptions.title("Raffle Dubai");
+        markerOptions.snippet("Get Energy ➔");
+        mMarker = mGoogleMap.addMarker(markerOptions);
+        mGoogleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                startActivity(new Intent(MainActivity.this, RaffelHotelActivity.class));
+                return false;
+            }
+        });
+
+
+        LatLng locationDHCC = new LatLng(25.2287,55.3276);
+        MarkerOptions markerOptions1 = new MarkerOptions();
+        markerOptions1.position(locationDHCC);
+        markerOptions1.icon(icon);
+        markerOptions1.title("Grand Hyatt Dubai");
+        markerOptions1.snippet("Get Energy ➔");
+        mMarker = mGoogleMap.addMarker(markerOptions1);
+
+        LatLng locationDPCS = new LatLng(25.2233,55.3251);
+        MarkerOptions markerOptions2 = new MarkerOptions();
+        markerOptions2.position(locationDPCS);
+        markerOptions2.icon(icon);
+        markerOptions2.title("Dubai Police Club Stadium");
+        markerOptions2.snippet("Get Energy ➔");
+        mMarker = mGoogleMap.addMarker(markerOptions2);
+
 
 
         mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,15));
