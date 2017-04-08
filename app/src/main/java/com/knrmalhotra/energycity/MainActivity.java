@@ -10,8 +10,11 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.Toast;
 
+import com.github.clans.fab.FloatingActionButton;
+import com.github.clans.fab.FloatingActionMenu;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
@@ -36,6 +39,11 @@ public class MainActivity extends AppCompatActivity implements
     private GoogleApiClient mGoogleApiClient;
     private Location mLocation;
     private Marker mMarker;
+    private FloatingActionMenu mFloatingActionMenu;
+    private FloatingActionButton mFloatingActionButton;
+    private boolean isPressed = false;
+    private FloatingActionButton mbtn1, mbtn2,mbtn3;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +52,38 @@ public class MainActivity extends AppCompatActivity implements
 
         mSupportMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.maps_location);
         mSupportMapFragment.getMapAsync(this);
+
+        mFloatingActionMenu = (FloatingActionMenu) findViewById(R.id.menu_labels_right);
+        mFloatingActionMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        mbtn1 = (FloatingActionButton) findViewById(R.id.fab_gear);
+        mbtn2 = (FloatingActionButton) findViewById(R.id.analytics);
+        mbtn3 = (FloatingActionButton) findViewById(R.id.clock);
+        mbtn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        mbtn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        mbtn3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+
     }
 
     @Override
