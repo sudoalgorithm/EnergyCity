@@ -33,7 +33,8 @@
         </activity>
         <activity android:name=".ProfileActivity" />
         <activity android:name=".RaffelHotelActivity" />
-        <activity android:name=".AnalyticsActivity"></activity>
+        <activity android:name=".AnalyticsActivity" />
+        <activity android:name=".RequestActivity"></activity>
     </application>
 
 </manifest>

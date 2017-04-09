@@ -8,7 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 
 public class SplashActivity extends AppCompatActivity {
 
-    private final int TIMER = 3000;
+    private final int TIMER = 2000;
     private Context mContext = this;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
